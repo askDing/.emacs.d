@@ -1,0 +1,8 @@
+recentf
+.backups/
+elpa/
+config.el
+.last-package-update-day
+.lsp-session-v1
+*backup*
+url/

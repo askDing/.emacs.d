@@ -717,8 +717,8 @@ emacsclient --alternate-editor emacs  <filename>
 
 ** hungry-delete
    #+begin_src emacs-lisp
-     (use-package hungry-delete
-       :config (global-hungry-delete-mode))
+     ;; (use-package hungry-delete
+     ;;   :init (global-hungry-delete-mode))
    #+end_src
 
 
@@ -1055,8 +1055,6 @@ emacsclient --alternate-editor emacs  <filename>
   (global-set-key (kbd "C-c c") 'org-capture)
   (setq org-capture-templates
 	'(
-	  ("a" "Appointment" entry (fiel+headline "~/Emacs/gcal.org" "Appointments")
-	   "* TODO %?\n:PROPERTIES:\n\n:END:\nDEADLINE: %^T \n %i\n")
 	  ("n" "Note" entry (file+headline "~/Emacs/notes.org" "Notes") "* Note %?\n%T")
 	  ("t" "TO DO item" entry (file+headline "~/Emacs/todo.org" "TO DO Item") "* %?\n%T" :prepend t)
 	  ("h" "Hack Skill" entry (file+headline "~/Emacs/hackskill.org" "Hack Skill") "* %?\n%T" :prepend t)
@@ -1069,14 +1067,16 @@ emacsclient --alternate-editor emacs  <filename>
 
 
 
+
+
 ** Magit
 #+begin_src emacs-lisp
   (use-package magit
     :commands magit-status
     :config
     (setq magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
- 
-#+end_src
+  (use-package forge)
+ #+end_src
 
 
 ** 编程插件
@@ -1265,6 +1265,17 @@ npm install eslint
 	youdao-dictionary-search-history-file "~/.emacs.d/.youdao"
 	youdao-dictionary-use-chinese-word-segmentation t))
 #+end_src
+
+** music
+下载 [[https://github.com/SpringHan/netease-cloud-music.el][Netease-Cloud-music]] 到* .emacs.d/plugins *目录 ~git clone https://github.com/SpringHan/netease-cloud-music.el.git  .emacs.d/plugins~
+安装mpv ~brew install --cask mpv~
+#+begin_src emacs-lisp
+  (add-to-list 'load-path "~/.emacs.d/plugins/netease-cloud-music.el")
+  (require 'netease-cloud-music)
+  (setq netease-cloud-music-player-command '("/usr/local/bin/mpv" "pause
+  " "seek 5" "seek -5"))
+#+end_src
+
 * 自定义函数
 
 ** split-and-follow-horizontally
@@ -1555,40 +1566,40 @@ npm install eslint
 [[https://www.flycheck.org/en/latest/][Flyc]]
 
 #+begin_src emacs-lisp
-  (use-package flycheck
-    :init
-    (use-package flycheck-grammarly :defer t)
-    (if (display-graphic-p)
-	(use-package flycheck-posframe
-	  :custom-face (flycheck-posframe-border-face ((t (:inherit default))))
-	  :hook (flycheck-mode . flycheck-posframe-mode)
-	  :custom
-	  (flycheck-posframe-border-width 1)
-	  (flycheck-posframe-inhibit-functions '((lambda (&rest _)
-						   (bound-and-true-p company-backend)))))
-      (use-package flycheck-pos-tip
-	:defines flycheck-pos-tip-timeout
-	:hook (flycheck-mode . flycheck-pos-tip-mode)
-	:custom (flycheck-post-tip-timeout 2)))
-    :hook (prog-mode . global-flycheck-mode)
-    :custom
-    (flycheck-global-modes '(not text-mode
-				 outline-mode
-				 fundamental-mode
-				 org-mode
-				 diff-mode
-				 shell-mode
-				 eshell-mode
-				 term-mode))
-    (flycheck-emacs-lisp-load-path 'inherit)
-    (flycheck-indication-mode 'right-fringe)
-    :config
-    (when (fboundp 'define-fringe-bitmap)
-      (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow
-	[16 48 112 240 112 48 16] nil nil 'center))
-    (flycheck-add-mode 'javascript-eslint 'js-mode)
-    (flycheck-add-mode 'typescript-tslint 'rjsx-mode))
-  (flycheck-posframe-mode -1)
+  ;; (use-package flycheck
+  ;;   :init
+  ;;   (use-package flycheck-grammarly :defer t)
+  ;;   (if (display-graphic-p)
+  ;;       (use-package flycheck-posframe
+  ;; 	:custom-face (flycheck-posframe-border-face ((t (:inherit default))))
+  ;; 	:hook (flycheck-mode . flycheck-posframe-mode)
+  ;; 	:custom
+  ;; 	(flycheck-posframe-border-width 1)
+  ;; 	(flycheck-posframe-inhibit-functions '((lambda (&rest _)
+  ;; 						 (bound-and-true-p company-backend)))))
+  ;;     (use-package flycheck-pos-tip
+  ;;       :defines flycheck-pos-tip-timeout
+  ;;       :hook (flycheck-mode . flycheck-pos-tip-mode)
+  ;;       :custom (flycheck-post-tip-timeout 2)))
+  ;;   :hook (prog-mode . global-flycheck-mode)
+  ;;   :custom
+  ;;   (flycheck-global-modes '(not text-mode
+  ;; 			       outline-mode
+  ;; 			       fundamental-mode
+  ;; 			       org-mode
+  ;; 			       diff-mode
+  ;; 			       shell-mode
+  ;; 			       eshell-mode
+  ;; 			       term-mode))
+  ;;   (flycheck-emacs-lisp-load-path 'inherit)
+  ;;   (flycheck-indication-mode 'right-fringe)
+  ;;   :config
+  ;;   (when (fboundp 'define-fringe-bitmap)
+  ;;     (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow
+  ;;       [16 48 112 240 112 48 16] nil nil 'center))
+  ;;   (flycheck-add-mode 'javascript-eslint 'js-mode)
+  ;;   (flycheck-add-mode 'typescript-tslint 'rjsx-mode))
+  ;; (flycheck-posframe-mode -1)
 #+end_src
 
 

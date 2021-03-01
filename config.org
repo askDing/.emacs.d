@@ -1079,6 +1079,18 @@ emacsclient --alternate-editor emacs  <filename>
  #+end_src
 
 
+** Restclient
+
+[[https://github.com/pashky/restclient.el][restclient.el]]
+
+#+begin_src emacs-lisp
+  (use-package restclient)
+  (use-package company-restclient
+    :config
+    (add-to-list 'company-backends 'company-restclient))
+#+end_src
+
+
 ** 编程插件
 
 

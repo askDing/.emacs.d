@@ -1267,8 +1267,8 @@ npm install eslint
 #+end_src
 
 ** music
-下载 [[https://github.com/SpringHan/netease-cloud-music.el][Netease-Cloud-music]] 到* .emacs.d/plugins *目录 ~git clone https://github.com/SpringHan/netease-cloud-music.el.git  .emacs.d/plugins~
-安装mpv ~brew install --cask mpv~
+- 下载 [[https://github.com/SpringHan/netease-cloud-music.el][Netease-Cloud-music]] 到* .emacs.d/plugins *目录 ~git clone https://github.com/SpringHan/netease-cloud-music.el.git  .emacs.d/plugins~
+- 安装mpv ~brew install --cask mpv~
 #+begin_src emacs-lisp
   (add-to-list 'load-path "~/.emacs.d/plugins/netease-cloud-music.el")
   (require 'netease-cloud-music)

@@ -1164,45 +1164,45 @@ npm install eslint
 
 [[https://github.com/sebastiencs/company-box][company-box]]
 #+begin_src emacs-lisp
-  (use-package company
-    :config
-    (setq company-minimum-prefix-length     3
-          company-idle-delay 0 
-          company-backends  '(company-bbdb 
-                              company-semantic
-                              company-cmake
-                              company-capf
-                              company-clang
-                              company-files
-                              (company-dabbrev-code company-gtags company-etags company-keywords)
-                              company-oddmuse
-                              company-dabbrev
-                              ))
-    :bind
-    (:map company-active-map
-          ("<tab>" . company-complete-selection)
-          ("C-p" . company-select-previous)
-          ("C-n" . company-select-next)
-          ("C-v" . company-next-page)
-          ("\M-v" . company-previous-page)))
-  (global-company-mode t)
+    (use-package company
+      :config
+      (setq company-minimum-prefix-length     3
+            company-idle-delay 0 
+            company-backends  '(company-bbdb 
+                                company-semantic
+                                company-cmake
+                                company-capf
+                                company-clang
+                                company-files
+                                (company-dabbrev-code company-gtags company-etags company-keywords)
+                                company-oddmuse
+                                company-dabbrev
+                                ))
+      :bind
+      (:map company-active-map
+            ("<tab>" . company-complete-selection)
+            ("C-p" . company-select-previous)
+            ("C-n" . company-select-next)
+            ("C-v" . company-next-page)
+            ("\M-v" . company-previous-page)))
+    (global-company-mode t)
 
-  (use-package company-box
-    :hook (company-mode . company-box-mode))
+    (use-package company-box
+      :hook (company-mode . company-box-mode))
 
-  (use-package company-shell
-       :config
-       (add-to-list 'company-backends '(company-shell company-shell-env company-fish-shell)))
+    (use-package company-shell
+         :config
+         (add-to-list 'company-backends '(company-shell company-shell-env company-fish-shell)))
 
-  (use-package company-irony
-    :config
-    (add-to-list 'company-backends 'company-irony))
-
-  (use-package irony
-    :config
-    (add-hook 'c++-mode 'irony-mode)
-    (add-hook 'c-mode-hook 'irony-mode)
-    (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+    (use-package company-irony
+      :config
+      (add-to-list 'company-backends 'company-irony))
+  ;; 需要安装*brew install cmke* 后执行*M-x irony-install-server*
+    (use-package irony
+      :config
+      (add-hook 'c++-mode 'irony-mode)
+      (add-hook 'c-mode-hook 'irony-mode)
+      (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 
 #+end_src
 
@@ -1217,39 +1217,39 @@ npm install eslint
 	  lsp-enable-symbol-highlighting t
 	  lsp-enable-snippet t   ;; need company-mode
 	  lsp-keymap-prefix "C-c l")
-    :hook ((python . lsp)
+    :hook ((prog-mode . (lsp-deferred))
 	   (lsp-mode . lsp-enable-which-key-intergration))
-    :commands (lsp lsp-deferred))
+	   :commands (lsp lsp-deferred))
 
-  (use-package lsp-ui
-    :config
-    (setq lsp-ui-sideline-show-hover t
-	  lsp-ui-sideline-ignore-duplicate t
-	  lsp-ui-sideline-delay 0
-	  lsp-ui-doc-position 'bottom
-	  lsp-ui-doc-alignment 'frame
-	  lsp-ui-doc-header nil
-	  lsp-ui-doc-include-signature t
-	  lsp-ui-doc-use-childframe t)
-    :bind
-    (:map lsp-ui-mode-map
-	  ("M-." . lsp-ui-peek-find-definition)
-	  ("M-?" . lsp-ui-peek-find-references))
-    :commands lsp-ui-mode)
+    (use-package lsp-ui
+      :config
+      (setq lsp-ui-sideline-show-hover t
+	    lsp-ui-sideline-ignore-duplicate t
+	    lsp-ui-sideline-delay 0
+	    lsp-ui-doc-position 'bottom
+	    lsp-ui-doc-alignment 'frame
+	    lsp-ui-doc-header nil
+	    lsp-ui-doc-include-signature t
+	    lsp-ui-doc-use-childframe t)
+      :bind
+      (:map lsp-ui-mode-map
+	    ("M-." . lsp-ui-peek-find-definition)
+	    ("M-?" . lsp-ui-peek-find-references))
+      :commands lsp-ui-mode)
 
-;; 参考https://www.jianshu.com/p/46667caad6fb
-;; 执行pip install pyton-language-server
-;; 打开python文件需要按<I> 选择"Import ....."这一行
+    ;; 参考https://www.jianshu.com/p/46667caad6fb
+    ;; 执行pip install pyton-language-server
+    ;; 打开python文件需要按<I> 选择"Import ....."这一行
 
-  (use-package lsp-python-ms
-    :init
-    (setq lsp-python-ms-auto-install-server t
-	  lsp-python-ms-python-executable "/usr/bin/python3")
-    :config
-    (setq lsp-pyls-server-command "/usr/local/bin/pyls")  ;;/usr/local/bin/pyls
-    :hook (python-mode . (lambda ()
-			   (require 'lsp-python-ms)
-			   (lsp))))
+    (use-package lsp-python-ms
+      :init
+      (setq lsp-python-ms-auto-install-server t
+	    lsp-python-ms-python-executable "/usr/bin/python3")
+      :config
+      (setq lsp-pyls-server-command "/usr/local/bin/pyls")  ;;/usr/local/bin/pyls
+      :hook (python-mode . (lambda ()
+			     (require 'lsp-python-ms)
+			     (lsp))))
 #+end_src
 
 

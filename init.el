@@ -19,7 +19,7 @@
  '(org-startup-folded 'overview)
  '(org-startup-indented t)
  '(package-selected-packages
-   '(company-restclient youdao-dictionary ox-reveal lsp-python-ms lsp-ui lsp-mode company-shell company-box company yasnippet-snippets flycheck-posframe flycheck-grammarly flycheck forge magit org-bullets markdown-mode eshell-git-prompt ivy-posframe ivy-avy all-the-icons-ivy-rich counsel-tramp counsel-osx-app counsel swiper embrace expand-region ace-window smart-mode-line command-log-mode which-key all-the-icons helpful auto-package-update use-package))
+   '(elfeed-org elfeed company-restclient youdao-dictionary ox-reveal lsp-python-ms lsp-ui lsp-mode company-shell company-box company yasnippet-snippets flycheck-posframe flycheck-grammarly flycheck forge magit org-bullets markdown-mode eshell-git-prompt ivy-posframe ivy-avy all-the-icons-ivy-rich counsel-tramp counsel-osx-app counsel swiper embrace expand-region ace-window smart-mode-line command-log-mode which-key all-the-icons helpful auto-package-update use-package))
  '(smtpmail-smtp-server "smtp.qq.com")
  '(smtpmail-smtp-service 25))
 (custom-set-faces

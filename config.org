@@ -1267,6 +1267,27 @@ npm install eslint
 
 
 
+** Elfeed
+#+begin_src emacs-lisp
+
+
+  (use-package elfeed
+    :config (setq elfeed-db-directory "~/Emacs/elfeeddb")
+    :bind (:map elfeed-search-mode-map
+                ("q" . bjm/elfeed-save-db-and-bury)
+                ("Q" . bjm/elfeed-save-db-and-bury)
+                ("j" . mz/make-and-run-elfeed-hydra)
+                ("m" . elfeed-toggle-star)
+                ("J" . mz/make-and-run-elfeed-hydra)
+                ("M" . elfeed-toggle-star)
+                )
+    )
+
+  (use-package elfeed-org
+    :config
+    (setq rmh-elfeed-org-files (list "~/Emacs/elfeed.org")))
+#+end_src
+
 ** 学习插件
 
 *** 翻译 youdao-dictonary

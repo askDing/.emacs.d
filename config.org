@@ -1167,24 +1167,24 @@ npm install eslint
   (use-package company
     :config
     (setq company-minimum-prefix-length     3
-	  company-idle-delay 0 
-	  company-backends  '(company-bbdb 
-			      company-semantic
-			      company-cmake
-			      company-capf
-			      company-clang
-			      company-files
-			      (company-dabbrev-code company-gtags company-etags company-keywords)
-			      company-oddmuse
-			      company-dabbrev
-			      ))
+          company-idle-delay 0 
+          company-backends  '(company-bbdb 
+                              company-semantic
+                              company-cmake
+                              company-capf
+                              company-clang
+                              company-files
+                              (company-dabbrev-code company-gtags company-etags company-keywords)
+                              company-oddmuse
+                              company-dabbrev
+                              ))
     :bind
     (:map company-active-map
-	  ("<tab>" . company-complete-selection)
-	  ("C-p" . company-select-previous)
-	  ("C-n" . company-select-next)
-	  ("C-v" . company-next-page)
-	  ("\M-v" . company-previous-page)))
+          ("<tab>" . company-complete-selection)
+          ("C-p" . company-select-previous)
+          ("C-n" . company-select-next)
+          ("C-v" . company-next-page)
+          ("\M-v" . company-previous-page)))
   (global-company-mode t)
 
   (use-package company-box
@@ -1193,7 +1193,17 @@ npm install eslint
   (use-package company-shell
        :config
        (add-to-list 'company-backends '(company-shell company-shell-env company-fish-shell)))
-   
+
+  (use-package company-irony
+    :config
+    (add-to-list 'company-backends 'company-irony))
+
+  (use-package irony
+    :config
+    (add-hook 'c++-mode 'irony-mode)
+    (add-hook 'c-mode-hook 'irony-mode)
+    (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+
 #+end_src
 
 *** LSP-Mode

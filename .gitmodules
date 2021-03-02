@@ -1,0 +1,3 @@
+[submodule "plugins/netease-cloud-music.el"]
+	path = plugins/netease-cloud-music.el
+	url = https://github.com/SpringHan/netease-cloud-music.el.git

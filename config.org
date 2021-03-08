@@ -1264,15 +1264,15 @@ npm install eslint
 [[https://github.com/emacs-lsp/lsp-ui][LSP-UI]]
 
 #+begin_src emacs-lisp
-    (use-package lsp-mode
-      :config
-      (setq lsp-idle-delay 0
-	    lsp-enable-symbol-highlighting t
-	    lsp-enable-snippet t   ;; need company-mode
-	    lsp-keymap-prefix "C-c l")
-      :hook ((prog-mode . (lsp-deferred))
-	     (lsp-mode . lsp-enable-which-key-intergration))
-      :commands (lsp lsp-deferred))
+  (use-package lsp-mode
+    :config
+    (setq lsp-idle-delay 0
+          lsp-enable-symbol-highlighting t
+          lsp-enable-snippet t   ;; need company-mode
+          lsp-keymap-prefix "C-c l")
+    :hook ((prog-mode . (lsp-deferred)))
+    ;;         (lsp-mode . lsp-enable-which-key-intergration))
+    :commands (lsp lsp-deferred))
 
   ;; (use-package eglot ;; client for language server protocol
   ;;   :config
@@ -1283,39 +1283,39 @@ npm install eslint
 
 
 
-    (use-package lsp-ui
-      :config
-      (setq lsp-ui-sideline-show-hover t
-	    lsp-ui-sideline-ignore-duplicate t
-	    lsp-ui-sideline-delay 0
-	    lsp-ui-doc-position 'bottom
-	    lsp-ui-doc-alignment 'frame
-	    lsp-ui-doc-header nil
-	    lsp-ui-doc-include-signature t
-	    lsp-ui-doc-use-childframe t)
-      :bind
-      (:map lsp-ui-mode-map
-	    ("M-." . lsp-ui-peek-find-definition)
-	    ("M-?" . lsp-ui-peek-find-references))
-      :commands lsp-ui-mode)
+  (use-package lsp-ui
+    :config
+    (setq lsp-ui-sideline-show-hover t
+          lsp-ui-sideline-ignore-duplicate t
+          lsp-ui-sideline-delay 0
+          lsp-ui-doc-position 'bottom
+          lsp-ui-doc-alignment 'frame
+          lsp-ui-doc-header nil
+          lsp-ui-doc-include-signature t
+          lsp-ui-doc-use-childframe t)
+    :bind
+    (:map lsp-ui-mode-map
+          ("M-." . lsp-ui-peek-find-definition)
+          ("M-?" . lsp-ui-peek-find-references))
+    :commands lsp-ui-mode)
 
-    ;; 参考https://www.jianshu.com/p/46667caad6fb
-    ;; 执行pip install pyton-language-server
-    ;; 打开python文件需要按<I> 选择"Import ....."这一行
+  ;; 参考https://www.jianshu.com/p/46667caad6fb
+  ;; 执行pip install pyton-language-server
+  ;; 打开python文件需要按<I> 选择"Import ....."这一行
 
 
-    (use-package lsp-python-ms
-      :init
-      (setq lsp-python-ms-auto-install-server t
-	    lsp-python-ms-python-executable "/usr/bin/python3")
-      :config
-      (setq lsp-pyls-server-command "/usr/local/bin/pyls")  ;;/usr/local/bin/pyls
-      :hook (python-mode . (lambda ()
-			     (require 'lsp-python-ms)
-			     (lsp))))
-    (use-package company-lsp
-      :config
-      (push 'company-lsp company-backends))
+  (use-package lsp-python-ms
+    :init
+    (setq lsp-python-ms-auto-install-server t
+          lsp-python-ms-python-executable "/usr/bin/python")
+    :config
+    (setq lsp-pyls-server-command "/usr/local/bin/pyls")  ;;/usr/local/bin/pyls
+    :hook (python-mode . (lambda ()
+                           (require 'lsp-python-ms)
+                           (lsp))))
+  ;; (use-package company-lsp
+  ;;   :config
+  ;;   (push 'company-lsp company-backends))
 
 #+end_src
 
@@ -1397,10 +1397,10 @@ npm install eslint
 - 下载 [[https://github.com/SpringHan/netease-cloud-music.el][Netease-Cloud-music]] 到* .emacs.d/plugins *目录 ~git clone https://github.com/SpringHan/netease-cloud-music.el.git  .emacs.d/plugins~
 - 安装mpv ~brew install --cask mpv~
 #+begin_src emacs-lisp
-  (add-to-list 'load-path "~/.emacs.d/plugins/netease-cloud-music.el")
-  (require 'netease-cloud-music)
-  (setq netease-cloud-music-player-command '("/usr/local/bin/mpv" "pause
-  " "seek 5" "seek -5"))
+  ;; (add-to-list 'load-path "~/.emacs.d/plugins/netease-cloud-music.el")
+  ;; (require 'netease-cloud-music)
+  ;; (setq netease-cloud-music-player-command '("/usr/local/bin/mpv" "pause
+  ;; " "seek 5" "seek -5"))
 #+end_src
 
 * 自定义函数

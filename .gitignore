@@ -1,4 +1,6 @@
 .cache/
+init.el
+eshell
 recentf
 .backups/
 elpa/

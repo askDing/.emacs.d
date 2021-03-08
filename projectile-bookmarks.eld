@@ -1,0 +1,1 @@
+("~/.emacs.d/" "~/Mr-Framework/" "~/dotfiles/" "~/secTools/CVE-2020-11651-poc/")

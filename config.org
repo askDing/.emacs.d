@@ -665,7 +665,7 @@ i c 创建一个循环的事件
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq user-full-name "Mr.Frame"
       user-mail-address "741474596@qq.com"
-      gc-cons-threshold (* 50 1000 1000)    ;;垃圾回收 gc-cons-threshold most-postive-fixnum
+      gc-cons-threshold (* 2 1000 1000)    ;;垃圾回收 gc-cons-threshold most-postive-fixnum
       )
 (setenv "BROWSER" "firefox")
 #+end_src
@@ -1151,40 +1151,7 @@ npm install eslint
 [[https://www.flycheck.org/en/latest/][Flyc]]
 
 #+begin_src emacs-lisp
-(use-package flycheck
-  :init
-  (use-package flycheck-grammarly :defer t)
-  (if (display-graphic-p)
-      (use-package flycheck-posframe
-	:custom-face (flycheck-posframe-border-face ((t (:inherit default))))
-	:hook (flycheck-mode . flycheck-posframe-mode)
-	:custom
-	(flycheck-posframe-border-width 1)
-	(flycheck-posframe-inhibit-functions '((lambda (&rest _)
-						 (bound-and-true-p company-backend)))))
-    (use-package flycheck-pos-tip
-      :defines flycheck-pos-tip-timeout
-      :hook (flycheck-mode . flycheck-pos-tip-mode)
-      :custom (flycheck-post-tip-timeout 1)))
-  :hook (prog-mode . global-flycheck-mode)
-  :custom
-  (flycheck-global-modes '(not text-mode
-			       outline-mode
-			       fundamental-mode
-			       org-mode
-			       diff-mode
-			       shell-mode
-			       eshell-mode
-			       term-mode))
-  (flycheck-emacs-lisp-load-path 'inherit)
-  (flycheck-indication-mode 'right-fringe)
-  :config
-  (when (fboundp 'define-fringe-bitmap)
-    (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow
-      [16 48 112 240 112 48 16] nil nil 'center))
-  (flycheck-add-mode 'javascript-eslint 'js-mode)
-  (flycheck-add-mode 'typescript-tslint 'rjsx-mode))
-(global-flycheck-mode -1)
+
 #+end_src
 
 
@@ -1195,13 +1162,15 @@ npm install eslint
 
   (use-package yasnippet
     :config
+    (add-hook 'prog-mode-hook #'yas-minor-mode)
     (setq yas-snippet-dirs
-	  '("~/.emacs.d/snippets"                       ;; personal snippets
-	    "~/.emacs.d/snippets/collection/"           ;; foo-mode and bar-mode snippet collection
-	    "~/.emacs.d/yasnippets/yasmate/snippets"    ;; the yasmate collection
-	    ))
-    ;; (yas-reload-all)
-    (add-hook 'prog-mode-hook #'yas-minor-mode))
+          '("~/.emacs.d/snippets"                       ;; personal snippets
+            "~/.emacs.d/snippets/collection/"           ;; foo-mode and bar-mode snippet collection
+            "~/.emacs.d/yasnippets/yasmate/snippets"    ;; the yasmate collection
+            ))
+    )
+  ;;(yas-global-mode 1)
+
 #+end_src
 
 
@@ -1293,10 +1262,10 @@ npm install eslint
           lsp-ui-doc-header nil
           lsp-ui-doc-include-signature t
           lsp-ui-doc-use-childframe t)
-    :bind
-    (:map lsp-ui-mode-map
-          ("M-." . lsp-ui-peek-find-definition)
-          ("M-?" . lsp-ui-peek-find-references))
+    ;;:bind
+    ;; (:map lsp-ui-mode-map
+    ;;       ("M-." . lsp-ui-peek-find-definition)
+    ;;       ("M-?" . lsp-ui-peek-find-references))
     :commands lsp-ui-mode)
 
   ;; 参考https://www.jianshu.com/p/46667caad6fb
@@ -1344,6 +1313,30 @@ npm install eslint
 
 
 
+
+
+***
+
+
+*** Dash 
+
+#+begin_src emacs-lisp
+;;*M-x* ~counsel-dash-install-docset~
+  ;; (use-package counsel-dash
+  ;;   :config
+  ;;   (setq counsel-dash-docsets-path "~/.emacs.d/.docset"
+  ;;         counsel-dash-docsets-url "https://raw.github.com/Kapeli/feeds/master"
+  ;;         counsel-dash-min-length 3
+  ;;         counsel-dash-candidate-format "%d %n (%t)"
+  ;;         counsel-dash-enable-debugging nil
+  ;;         counsel-dash-browser-func 'browse-url
+  ;;         counsel-dash-ignored-docsets nil
+  ;;         counsel-dash-common-docsets '("Python_3"))
+  ;;   )
+
+  (use-package dash-at-point)
+  
+#+end_src
 
 
 ** smartparens

@@ -1,3 +1,4 @@
+
 * 快捷键列表
 ** Apperance
 | Action                           | Keybindings | Function                      |
@@ -515,30 +516,33 @@ i c 创建一个循环的事件
 
 ** 文本设置
 #+begin_src emacs-lisp
-(setq indent-tabs-mode t                       ;;tab键锁进
-      default-tab-width 4                      ;;tab宽度
-      ;;line-spacing 1                         ;;设置行高
-      kill-ring-max 200                        ;;剪贴板最大200条
-      global-hungry-delete-mode t              ;; 贪婪删除模式
-      show-paren-style 'parenthesis 
-      fill-column 80  
-      auto-fill-mode t                         ;;空格换行
-      comment-auto-fill-only-comments t        ;;注释自动换行
-      sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*"
-      sentence-end-double-space nil            ;;支持中文符号
-      track-eol t                              ;; 当光标在行尾上下移动的时候，始终保持在行尾
-      scroll-margin 3                          ;; 滚动边距为3行
-      scroll-conservatively 10000              ;;滚动保留最大行数    
-      )
-(visual-line-mode t)                           ;;自动折行
-(global-linum-mode t)        
-(delete-selection-mode t)
-(global-font-lock-mode t)
-(column-number-mode t)
-(line-number-mode t)
-(show-paren-mode t)     
-(auto-image-file-mode t)
-;;(global-hl-line-mode t) 
+  (setq indent-tabs-mode t                       ;;tab键锁进
+        default-tab-width 4                      ;;tab宽度
+        ;;line-spacing 1                         ;;设置行高
+        kill-ring-max 200                        ;;剪贴板最大200条
+        global-hungry-delete-mode t              ;; 贪婪删除模式
+        show-paren-style 'parenthesis 
+        fill-column 80  
+        auto-fill-mode t                         ;;空格换行
+        comment-auto-fill-only-comments t        ;;注释自动换行
+        sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*"
+        sentence-end-double-space nil            ;;支持中文符号
+        track-eol t                              ;; 当光标在行尾上下移动的时候，始终保持在行尾
+        scroll-margin 3                          ;; 滚动边距为3行
+        scroll-conservatively 10000              ;;滚动保留最大行数    
+        )
+  (visual-line-mode t)                           ;;自动折行
+  (global-linum-mode t)        
+  (delete-selection-mode t)
+  (global-font-lock-mode t)
+  (column-number-mode t)
+  (line-number-mode t)
+  (show-paren-mode t)     
+  (auto-image-file-mode t)
+  ;;(global-hl-line-mode t) 
+
+;;  (set-face-background 'highlight-indentation-face "#b0c4de")
+;;  (set-face-background 'highlight-indentation-current-column-face "#b0c4de")
 #+end_src
 
 
@@ -1140,8 +1144,10 @@ emacsclient --alternate-editor emacs  <filename>
 
 ** 编程插件
 
+*** highlight-indentation
+#+begin_src emacs-lisp
 
-
+#+end_src
 *** 语法检查 flycheck
 #+begin_src shell
 pip install pylint
@@ -1321,7 +1327,7 @@ npm install eslint
 *** Dash 
 
 #+begin_src emacs-lisp
-;;*M-x* ~counsel-dash-install-docset~
+  ;;*M-x* ~counsel-dash-install-docset~
   ;; (use-package counsel-dash
   ;;   :config
   ;;   (setq counsel-dash-docsets-path "~/.emacs.d/.docset"
@@ -1335,7 +1341,7 @@ npm install eslint
   ;;   )
 
   (use-package dash-at-point)
-  
+
 #+end_src
 
 
@@ -1570,6 +1576,8 @@ RET			;; org-return
 
 
   (setq ibuffer-expert t)   ;; D kill buffer immediately
+  (global-set-key (kbd "C-x k") 'kill-current-buffer)
+
   
   (global-set-key (kbd "C-S-n") 'scroll-up-command)
   (global-set-key (kbd "C-S-p") 'scroll-down-command)

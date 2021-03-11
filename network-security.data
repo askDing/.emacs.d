@@ -1,5 +1,0 @@
-(
- (:id "sha1:be61c73fd560af3ab641c5e58bd80e717970950b" :fingerprints ("sha1:75:20:cd:7b:e7:29:eb:79:e8:b2:8e:ae:d6:fd:aa:0a:60:4f:fe:ff") :host "112.35.71.1:8442" :conditions (:self-signed :no-host-match :unknown-ca :invalid :verify-cert))
- (:id "sha1:ff64f82078ae4cd7abafb258917f055383a6f715" :fingerprints ("sha1:65:4c:fc:37:4f:b0:31:67:90:6e:84:33:52:61:c3:3e:c8:af:b3:42") :host "www.baidu.com:443" :conditions (:renegotiation-info-ext))
- (:id "sha1:14c2bc6f6cf16be3d328fe78ec9186fba32ebae1" :fingerprints ("sha1:3f:27:f7:f1:9a:1d:27:4e:07:9a:f3:38:40:98:3b:2c:7a:45:36:48") :conditions nil)
-)

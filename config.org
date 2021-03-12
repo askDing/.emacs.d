@@ -172,10 +172,10 @@
   ;; | Indent Region Left          |             | indent-rigidly-left                  |
   ;; | Indent Region Right         |             | indent-rigidly-right                 |
   ;; |-----------------------------+-------------+--------------------------------------|
-  (global-set-key (kbd "M-f") 'swiper);; | Search     
-  (global-set-key (kbd "C-M-f") 'counsel-imenu);; | Search Tags       
-  (global-set-key (kbd "M-%") 'query-replace);; | Replace  
-  (global-set-key (kbd "C-M-%") 'query-replace-regexp) ;; | Replace Regex      
+  (global-set-key (kbd "C-s") 'swiper);; | Search     
+  (global-set-key (kbd "C-S-s") 'counsel-imenu);; | Search Tags       
+  (global-set-key (kbd "C-r") 'query-replace);; | Replace  
+  (global-set-key (kbd "C-S-r") 'query-replace-regexp) ;; | Replace Regex      
   ;; |-----------------------------+-------------+--------------------------------------|
   ;; | transpose-chars             | C-t         | transpose-chars                      |
   ;; | transpose-words             | M-t         | transpose-words                      |
@@ -309,8 +309,8 @@ Emacs宏生成序列:
   ;; | Previous Error  |             | previous-error                    |
   ;; |-----------------+-------------+-----------------------------------|
   ;; | Goto Char       |             | avy-goto-char-in-line             |
-  (global-set-key (kbd "C-s") 'avy-goto-char);; | Goto Char  
   (global-set-key (kbd "M-s") 'avy-goto-line);; | Goto Line  
+  (global-set-key (kbd "C-M-s") 'avy-goto-char);; | Goto Char  
  ;; (define-key ivy-minibuffer-map (kbd "M-s") 'ivy-posframe--swiper-avy-goto)
   ;; |-----------------+-------------+-----------------------------------|
   ;; | Next change     |             | highlight-changes-next-change     |
@@ -632,6 +632,7 @@ i c 创建一个循环的事件
   (delete-selection-mode t)
   (global-font-lock-mode t)
   (column-number-mode t)
+  (hs-minor-mode t)
   (line-number-mode t)
   (show-paren-mode t)     
   (auto-image-file-mode t)

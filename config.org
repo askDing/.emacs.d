@@ -299,9 +299,10 @@ Emacs宏生成序列:
 ** Goto
 #+begin_src emacs-lisp
   ;; |-----------------+-------------+-----------------------------------|
-  (global-set-key (kbd "M-.") 'xref-find-definitions);; | Goto Definition 
+  (global-set-key (kbd "M-RET") 'lsp-ui-imenu)      ;; lsp-ui-imenu
+  (global-set-key (kbd "M-.") 'xref-find-definitions) ;; | Goto Definition 
   (global-set-key (kbd "M-?") 'xref-find-references);; | Goto Reference 
-  (global-set-key (kbd "M-,") 'xref-pop-marker-stack);; | Back      
+  (global-set-key (kbd "M-,") 'xref-pop-marker-stack);; | Back     
   ;; |-----------------+-------------+-----------------------------------|
   ;; | All Errors      |             |                                   |
   ;; | Next Error      |             | next-error                        |
@@ -310,11 +311,12 @@ Emacs宏生成序列:
   ;; | Goto Char       |             | avy-goto-char-in-line             |
   (global-set-key (kbd "M-s") 'avy-goto-line);; | Goto Line  
   (global-set-key (kbd "C-M-s") 'avy-goto-char);; | Goto Char  
- ;; (define-key ivy-minibuffer-map (kbd "M-s") 'ivy-posframe--swiper-avy-goto)
+  ;; (define-key ivy-minibuffer-map (kbd "M-s") 'ivy-posframe--swiper-avy-goto)
   ;; |-----------------+-------------+-----------------------------------|
   ;; | Next change     |             | highlight-changes-next-change     |
   ;; | Previous change |             | highlight-changes-previous-change |
   ;; |-----------------+-------------+-----------------------------------|
+
 #+end_src
 
 
@@ -1232,7 +1234,7 @@ npm install eslint
 
 #+end_src
 
-*** LSP-Mode and eglot
+*** LSP-Mode 
 
 [[https://github.com/emacs-lsp/lsp-ui][LSP-UI]]
 
@@ -1255,12 +1257,20 @@ npm install eslint
     (setq lsp-ui-sideline-show-hover t
           lsp-ui-sideline-ignore-duplicate t
           lsp-ui-sideline-delay 0
-          lsp-ui-doc-position 'bottom
+          ;;lsp-ui-doc
+          lsp-ui-doc-enable t
+          lsp-ui-doc-position 'top
+          lsp-ui-doc-delay 0.1
+          lsp-ui-doc-show-with-cursor t
           lsp-ui-doc-alignment 'frame
           lsp-ui-doc-header nil
           lsp-ui-doc-include-signature t
-          lsp-ui-doc-use-childframe t)
-    :commands lsp-ui-mode)
+          lsp-ui-doc-use-childframe t
+          ;; lsp-ui-imenu
+          lsp-ui-imenu-auto-refresh t
+          lsp-ui-imenu-auto-refresh-delay 0.1
+          ))
+  (lsp-ui-mode t)
 
   ;; 参考https://www.jianshu.com/p/46667caad6fb
   ;; 执行pip install pyton-language-server

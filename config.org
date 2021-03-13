@@ -177,10 +177,9 @@
   (global-set-key (kbd "C-r") 'query-replace);; | Replace  
   (global-set-key (kbd "C-S-r") 'query-replace-regexp) ;; | Replace Regex      
   ;; |-----------------------------+-------------+--------------------------------------|
-  ;; | transpose-chars             | C-t         | transpose-chars                      |
-  ;; | transpose-words             | M-t         | transpose-words                      |
-  ;; | transpose-lines             | C-x C-t     | transpose-lines                      |
-  ;; | transpose-region            |             | transpose-regions                    |
+  (global-set-key (kbd "C-t") 'transpose-chars);; | ransposet-chars  
+  (global-set-key (kbd "M-t") 'transpose-words);; | transpose-words  
+  (global-set-key (kbd "C-x C-t") 'transpose-lines);; | transpose-lines   
   ;; |-----------------------------+-------------+--------------------------------------|
   ;; | Bookmark  Menu              |             | bookmark-bmenu-list                  |
   (global-set-key (kbd "C-x r") 'counsel-bookmark);; | Mark/Jump bookmark   
@@ -490,7 +489,7 @@ i c 创建一个循环的事件
 (define-abbrev-table 'global-abbrev-table
   '(
     ;; net abbrev
-    ("afaik" "as far as i know")
+    ("coder" "# Mr.Frame")
     ("atm" "at the moment")
     ("dfb" "difference between")
     ))
@@ -522,207 +521,207 @@ i c 创建一个循环的事件
 
 #+begin_src emacs-lisp
 
- ;;;; 映射方向键(arrow keys)
- ;; 使用karabiner修改，需禁用
- ;; (global-set-key (kbd "H-i") 'previous-line)
- ;; (global-set-key (kbd "H-k") 'next-line)
- ;; (global-set-key (kbd "H-l") 'forward-char)
- ;; (global-set-key (kbd "H-j") 'backward-char)
+   ;;;; 映射方向键(arrow keys)
+   ;; 使用karabiner修改，需禁用
+   ;; (global-set-key (kbd "H-i") 'previous-line)
+   ;; (global-set-key (kbd "H-k") 'next-line)
+   ;; (global-set-key (kbd "H-l") 'forward-char)
+   ;; (global-set-key (kbd "H-j") 'backward-char)
 
 
-  ;;;; 绑定修饰键(modifier Keys)
-  (when (eq system-type 'darwin)                 ;; mac specific settings
-    (setq
-     mac-command-modifier 'meta             ;; 设置左Command键为Meta键
-     ;; mac-right-command-modifier 'meta       ;; 设置右Command键为Meta键
+    ;;;; 绑定修饰键(modifier Keys)
+    (when (eq system-type 'darwin)                 ;; mac specific settings
+      (setq
+       mac-command-modifier 'meta             ;; 设置左Command键为Meta键
+       ;; mac-right-command-modifier 'meta       ;; 设置右Command键为Meta键
 
-     ;; mac-control-modifier 'control          ;; 设置Control键为Control键
+       ;; mac-control-modifier 'control          ;; 设置Control键为Control键
 
-     mac-option-modifier 'super             ;; 设置左Option键为Super键
-     mac-right-option-modifier 'hyper       ;; 设置右Option键为Hyper键
-     mac-function-modifier 'hyper   )         ;; 暂不设置Fn键作用
-    )
-
-;;;; 字体字符集
-(prefer-coding-system 'utf-8)
-(setq buffer-file-coding-system 'utf-8-unix
-      default-file-name-coding-system 'utf-8-unix
-      default-keyboard-coding-system 'utf-8-unix
-      default-process-coding-system '(utf-8-unix . utf-8-unix)
-      default-sendmail-coding-system 'utf-8-unix
-      default-terminal-coding-system 'utf-8-unix)
-(set-face-attribute 'default nil :font "Source Code Pro-14" ) 
-
-
-;;;; 窗格设置
-;;(menu-bar-mode -1)                     ;; 关闭菜单栏
-(tool-bar-mode -1)                       ;; 关闭工具栏
-(set-scroll-bar-mode nil)                ;; 关闭滚动条
-(global-tab-line-mode t)                 ;; 启用标签页
-(load-theme 'tango-dark)                 ;; 启动界面
-(setq-default cursor-type 'bar)          ;; 光标为｜
-(tooltip-mode -1)                        ;; 关闭帮助信息
-(auto-compression-mode t)
-(setq inhibit-startup-message t          ;; 禁止启动GNU Emacs主页面
-      gnus-inhibit-startup-message t     ;; 关闭gnus启动时画面
-      visible-bell t
-      enable-recursive-minibuffers t
-      default-directory "~/"             ;; 文件设置
-      dired-recursive-deletes 'always
-      dired-recursive-copies 'always
-      ls-lisp-use-insert-directory-program nil
-      time-stamp-active t
-      time-stamp-warn-inactive t
-      time-stamp-format "%Y-%02m-%02d %3a %02H:%02M:%02S %l"
+       mac-option-modifier 'super             ;; 设置左Option键为Super键
+       mac-right-option-modifier 'hyper       ;; 设置右Option键为Hyper键
+       mac-function-modifier 'hyper   )         ;; 暂不设置Fn键作用
       )
-(setq default-frame-alist '(;; frame layout
-			    (frame-title-format "%b@Emacs")
-                            (menu-bar-mode 't)
-			    (tool-bar-mode -1)
-			    (scroll-bar-mode 't)
-			    (top . 95)
-			    (left . 350)
-			    ;;(when window-system (set-frame-size (selected-frame) 110 35))
-			    (width . 150)
-			    (height . 45)
-			    (load-theme 'tango-dark)                 ;;启动界面
-			    ;; UI color
-			    (background-color . "grey18")
-			    (foreground-color . "green")
-			    ;; mouse
-			    (mouse-color . "gold1")
-			    ;;menu bar
-			    (menu-bar-lines . 1)
-			    ;; tool bar
-			    (tool-bar-lines . 0)
-			    ;; fringe 
-			    (right-fringe)
-			    (fringe-mode 2)
-			    (left-fringe)
-			    ;;face setting
-			    (face-foreground 'highlight "whithe")
-			    (face-background 'highlight "blue")
-			    (face-foreground 'region "cyan")
-			    (face-background 'region "blue")
-			    (face-foreground 'diary-face "skyblue")
-			    (face-background 'holiday-face "slate blue")
-			    (face-foreground 'holiday-face "white")
-			    (face-foreground 'secondary-selection "skyblue")
-			    (face-background 'secondary-selection "darkblue")
-			    ))
 
-;;;; 文本设置
-  (setq indent-tabs-mode t                       ;;tab键锁进
-        default-tab-width 4                      ;;tab宽度
-        ;;line-spacing 1                         ;;设置行高
-        kill-ring-max 200                        ;;剪贴板最大200条
-        global-hungry-delete-mode t              ;; 贪婪删除模式
-        show-paren-style 'parenthesis 
-        fill-column 80  
-        auto-fill-mode t                         ;;空格换行
-        comment-auto-fill-only-comments t        ;;注释自动换行
-        sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*"
-        sentence-end-double-space nil            ;;支持中文符号
-        track-eol t                              ;; 当光标在行尾上下移动的时候，始终保持在行尾
-        scroll-margin 3                          ;; 滚动边距为3行
-        scroll-conservatively 10000              ;;滚动保留最大行数    
+  ;;;; 字体字符集
+  (prefer-coding-system 'utf-8)
+  (setq buffer-file-coding-system 'utf-8-unix
+        default-file-name-coding-system 'utf-8-unix
+        default-keyboard-coding-system 'utf-8-unix
+        default-process-coding-system '(utf-8-unix . utf-8-unix)
+        default-sendmail-coding-system 'utf-8-unix
+        default-terminal-coding-system 'utf-8-unix)
+  (set-face-attribute 'default nil :font "Source Code Pro-14" ) 
+
+
+  ;;;; 窗格设置
+  ;;(menu-bar-mode -1)                     ;; 关闭菜单栏
+  (tool-bar-mode -1)                       ;; 关闭工具栏
+  (set-scroll-bar-mode nil)                ;; 关闭滚动条
+  (global-tab-line-mode t)                 ;; 启用标签页
+  (load-theme 'tango-dark)                 ;; 启动界面
+  (setq-default cursor-type 'bar)          ;; 光标为｜
+  (tooltip-mode -1)                        ;; 关闭帮助信息
+  (auto-compression-mode t)
+  (setq inhibit-startup-message t          ;; 禁止启动GNU Emacs主页面
+        gnus-inhibit-startup-message t     ;; 关闭gnus启动时画面
+        visible-bell t
+        enable-recursive-minibuffers t
+        default-directory "~/"             ;; 文件设置
+        dired-recursive-deletes 'always
+        dired-recursive-copies 'always
+        ls-lisp-use-insert-directory-program nil
+        time-stamp-active t
+        time-stamp-warn-inactive t
+        time-stamp-format "%Y-%02m-%02d %3a %02H:%02M:%02S %l"
         )
-  (visual-line-mode t)                           ;;自动折行
-  (global-linum-mode t)        
-  (delete-selection-mode t)
-  (global-font-lock-mode t)
-  (column-number-mode t)
-  (hs-minor-mode t)
-  (line-number-mode t)
-  (show-paren-mode t)     
-  (auto-image-file-mode t)
-  (setq ibuffer-expert t)   ;; D kill buffer immediately
-  ;;(global-hl-line-mode t) 
-;;  (set-face-background 'highlight-indentation-face "#b0c4de")
-;;  (set-face-background 'highlight-indentation-current-column-face "#b0c4de")
+  (setq default-frame-alist '(;; frame layout
+                              (frame-title-format "%b@Emacs")
+                              (menu-bar-mode 't)
+                              (tool-bar-mode -1)
+                              (scroll-bar-mode 't)
+                              (top . 95)
+                              (left . 350)
+                              ;;(when window-system (set-frame-size (selected-frame) 110 35))
+                              (width . 150)
+                              (height . 45)
+                              (load-theme 'tango-dark)                 ;;启动界面
+                              ;; UI color
+                              (background-color . "grey18")
+                              (foreground-color . "green")
+                              ;; mouse
+                              (mouse-color . "gold1")
+                              ;;menu bar
+                              (menu-bar-lines . 1)
+                              ;; tool bar
+                              (tool-bar-lines . 0)
+                              ;; fringe 
+                              (right-fringe)
+                              (fringe-mode 2)
+                              (left-fringe)
+                              ;;face setting
+                              (face-foreground 'highlight "whithe")
+                              (face-background 'highlight "blue")
+                              (face-foreground 'region "cyan")
+                              (face-background 'region "blue")
+                              (face-foreground 'diary-face "skyblue")
+                              (face-background 'holiday-face "slate blue")
+                              (face-foreground 'holiday-face "white")
+                              (face-foreground 'secondary-selection "skyblue")
+                              (face-background 'secondary-selection "darkblue")
+                              ))
 
-;;;; 编程相关
-(setq auto-mode-alist
-      ;;关联文件后缀和模式
-      (append '(("\\.s?html?\\'" . html-helper-mode)
-                ("\\.asp\\'" . html-helper-mode)
-                ("\\.phtml\\'" . html-helper-mode)
-                ("\\.jsx\\'" . jsx-mode))
-              auto-mode-alist))
+  ;;;; 文本设置
+    (setq indent-tabs-mode t                       ;;tab键锁进
+          default-tab-width 4                      ;;tab宽度
+          ;;line-spacing 1                         ;;设置行高
+          kill-ring-max 200                        ;;剪贴板最大200条
+          global-hungry-delete-mode t              ;; 贪婪删除模式
+          show-paren-style 'parenthesis 
+          fill-column 80  
+          auto-fill-mode t                         ;;空格换行
+          comment-auto-fill-only-comments t        ;;注释自动换行
+          sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*"
+          sentence-end-double-space nil            ;;支持中文符号
+          track-eol t                              ;; 当光标在行尾上下移动的时候，始终保持在行尾
+          scroll-margin 3                          ;; 滚动边距为3行
+          scroll-conservatively 10000              ;;滚动保留最大行数    
+          )
+    (visual-line-mode t)                           ;;自动折行
+    (global-linum-mode t)        
+    (delete-selection-mode t)
+    (global-font-lock-mode t)
+    (column-number-mode t)
+    (line-number-mode t)
+    (show-paren-mode t)     
+    (auto-image-file-mode t)
+    (setq ibuffer-expert t)   ;; D kill buffer immediately
+    ;;(global-hl-line-mode t) 
+  ;;  (set-face-background 'highlight-indentation-face "#b0c4de")
+  ;;  (set-face-background 'highlight-indentation-current-column-face "#b0c4de")
 
-(add-hook 'c-mode-hook '(lambda ()
-			  (c-set-style "k&r")))
+  ;;;; 编程相关
+  (setq auto-mode-alist
+        ;;关联文件后缀和模式
+        (append '(("\\.s?html?\\'" . html-helper-mode)
+                  ("\\.asp\\'" . html-helper-mode)
+                  ("\\.phtml\\'" . html-helper-mode)
+                  ("\\.jsx\\'" . jsx-mode))
+                auto-mode-alist))
 
-
-;;;; 时间和日记
-(setq calendar-latitude +39.54  ;;地理位置
-      calendar-longitude +116.28
-      calendar-location-name "北京"  
-      ;;显示时间
-      display-time-interval      10
-      display-time-24hr-format   t   
-      display-time-day-and-date  t    
-      display-time-use-mail-icon t
-      calendar-load-hook '(lambda () ;;日历颜色
-			    (set-face-foreground 'diary-face "skyblue")
-			    (set-face-background 'holiday-face "slate blue")
-			    (set-face-foreground 'holiday-face "white"))
-      ;; 设置农历
-      chinese-calendar-celestial-stem  ["甲" "乙" "丙" "丁" "戊" "己" "庚" "辛" "壬" "癸"]            
-      chinese-calendar-terrestrial-branch  ["子" "丑" "寅" "卯" "辰" "巳" "戊" "未" "申" "酉" "戌" "亥"]
-
-      calendar-remove-frame-by-deleting t
-      mark-diary-entries-in-calendar t         ; 标记calendar上有diary的日期
-      mark-holidays-in-calendar nil            ; 为了突出有diary的日期，calendar上不标记节日
-      view-calendar-holidays-initially nil     ; 打开calendar的时候不显示一堆节日
-      ;;去掉西方节日
-      christian-holidays nil
-      hebrew-holidays nil
-      islamic-holidays nil
-      solar-holidays nil
-      ;;设定中国节日
-      general-holidays '((holiday-fixed 1 1 "元旦")
-			 (holiday-fixed 2 14 "情人节")
-			 (holiday-fixed 3 14 "白色情人节")
-			 (holiday-fixed 4 1 "愚人节")
-			 (holiday-fixed 5 1 "劳动节")
-			 (holiday-float 5 0 2 "母亲节")
-			 (holiday-fixed 6 1 "儿童节")
-			 (holiday-float 6 0 3 "父亲节")
-			 (holiday-fixed 7 1 "建党节")
-			 (holiday-fixed 8 1 "建军节")
-			 (holiday-fixed 9 10 "教师节")
-			 (holiday-fixed 10 1 "国庆节")
-			 (holiday-fixed 12 25 "圣诞节"))
-      ;; 日记
-      diary-file "~/.emacs.d/diary/diary"
-      diary-mail-addr "741474596@qq.com")
-(display-time-mode t) 
+  (add-hook 'c-mode-hook '(lambda ()
+                            (c-set-style "k&r")))
+  (add-hook 'prog-mode-hook 'hs-minor-mode)
 
 
-;;;; 备份相关
-(setq auto-save-interval 200  ;;输入超过120字符自动保存
-      auto-save-timeout  20   ;;15秒无动作自动保存
-      make-backup-files   t   
-      version-control t
-      backup-by-copying   t   ;;默认重命名,https://www.gnu.org/software/emacs/manual/html_node/emacs/Backup-Copying.html
-      delete-old-versions t
-      kept-new-versions   3
-      kept-old-versions   2
-      auto-save-list-file-prefix nil ;; 不生成auto-save目录
-      backup-directory-alist '(("." . "~/.emacs.d/.backups")) 
-      ) ;;自动保存模式auto-save-default t)  默认是开启,   auto-save-interval  默认5mins
+  ;;;; 时间和日记
+  (setq calendar-latitude +39.54  ;;地理位置
+        calendar-longitude +116.28
+        calendar-location-name "北京"  
+        ;;显示时间
+        display-time-interval      10
+        display-time-24hr-format   t   
+        display-time-day-and-date  t    
+        display-time-use-mail-icon t
+        calendar-load-hook '(lambda () ;;日历颜色
+                              (set-face-foreground 'diary-face "skyblue")
+                              (set-face-background 'holiday-face "slate blue")
+                              (set-face-foreground 'holiday-face "white"))
+        ;; 设置农历
+        chinese-calendar-celestial-stem  ["甲" "乙" "丙" "丁" "戊" "己" "庚" "辛" "壬" "癸"]            
+        chinese-calendar-terrestrial-branch  ["子" "丑" "寅" "卯" "辰" "巳" "戊" "未" "申" "酉" "戌" "亥"]
 
-;;;; 其他设置
-(fset 'yes-or-no-p 'y-or-n-p)
-(setq user-full-name "Mr.Frame"
-      user-mail-address "741474596@qq.com"
-      gc-cons-threshold (* 2 1000 1000)    ;;垃圾回收 gc-cons-threshold most-postive-fixnum
-      )
-(setenv "BROWSER" "firefox")
-(server-mode t)
-;;(server-start)
-;; emacsclient --alternate-editor emacs  <filename>
+        calendar-remove-frame-by-deleting t
+        mark-diary-entries-in-calendar t         ; 标记calendar上有diary的日期
+        mark-holidays-in-calendar nil            ; 为了突出有diary的日期，calendar上不标记节日
+        view-calendar-holidays-initially nil     ; 打开calendar的时候不显示一堆节日
+        ;;去掉西方节日
+        christian-holidays nil
+        hebrew-holidays nil
+        islamic-holidays nil
+        solar-holidays nil
+        ;;设定中国节日
+        general-holidays '((holiday-fixed 1 1 "元旦")
+                           (holiday-fixed 2 14 "情人节")
+                           (holiday-fixed 3 14 "白色情人节")
+                           (holiday-fixed 4 1 "愚人节")
+                           (holiday-fixed 5 1 "劳动节")
+                           (holiday-float 5 0 2 "母亲节")
+                           (holiday-fixed 6 1 "儿童节")
+                           (holiday-float 6 0 3 "父亲节")
+                           (holiday-fixed 7 1 "建党节")
+                           (holiday-fixed 8 1 "建军节")
+                           (holiday-fixed 9 10 "教师节")
+                           (holiday-fixed 10 1 "国庆节")
+                           (holiday-fixed 12 25 "圣诞节"))
+        ;; 日记
+        diary-file "~/.emacs.d/diary/diary"
+        diary-mail-addr "741474596@qq.com")
+  (display-time-mode t) 
+
+
+  ;;;; 备份相关
+  (setq auto-save-interval 200  ;;输入超过120字符自动保存
+        auto-save-timeout  20   ;;15秒无动作自动保存
+        make-backup-files   t   
+        version-control t
+        backup-by-copying   t   ;;默认重命名,https://www.gnu.org/software/emacs/manual/html_node/emacs/Backup-Copying.html
+        delete-old-versions t
+        kept-new-versions   3
+        kept-old-versions   2
+        auto-save-list-file-prefix nil ;; 不生成auto-save目录
+        backup-directory-alist '(("." . "~/.emacs.d/.backups")) 
+        ) ;;自动保存模式auto-save-default t)  默认是开启,   auto-save-interval  默认5mins
+
+  ;;;; 其他设置
+  (fset 'yes-or-no-p 'y-or-n-p)
+  (setq user-full-name "Mr.Frame"
+        user-mail-address "741474596@qq.com"
+        gc-cons-threshold (* 2 1000 1000)    ;;垃圾回收 gc-cons-threshold most-postive-fixnum
+        )
+  (setenv "BROWSER" "firefox")
+  (server-mode t)
+  ;;(server-start)
+  ;; emacsclient --alternate-editor emacs  <filename>
 #+end_src
 
 
@@ -1148,10 +1147,10 @@ i c 创建一个循环的事件
 [[https://github.com/pashky/restclient.el][restclient.el]]
 
 #+begin_src emacs-lisp
-  (use-package restclient)
-  (use-package company-restclient
-    :config
-    (add-to-list 'company-backends 'company-restclient))
+  ;; (use-package restclient)
+  ;; (use-package company-restclient
+  ;;   :config
+  ;;   (add-to-list 'company-backends 'company-restclient))
 #+end_src
 
 
@@ -1199,46 +1198,32 @@ npm install eslint
 
 [[https://github.com/sebastiencs/company-box][company-box]]
 #+begin_src emacs-lisp
-    (use-package company
-      :config
-      (setq company-minimum-prefix-length     3
-            company-idle-delay 0 
-            company-backends  '(company-bbdb 
-                                company-semantic
-                                company-cmake
-                                company-capf
-                                company-clang
-                                company-files
-                                (company-dabbrev-code company-gtags company-etags company-keywords)
-                                company-oddmuse
-                                company-dabbrev
-                                ))
-      :bind
-      (:map company-active-map
-            ("<tab>" . company-complete-selection)
-            ("C-p" . company-select-previous)
-            ("C-n" . company-select-next)
-            ("C-v" . company-next-page)
-            ("\M-v" . company-previous-page)))
-    (global-company-mode t)
+  (use-package company
+    :config
+    (setq company-minimum-prefix-length     3
+          company-idle-delay 0 
+          company-backends  '(
+                              company-capf
+                              (company-lsp company-yasnippet)
+                              company-dabbrev-code company-dabbrev company-files
+                              (company-shell company-shell-env company-fish-shell))
+          )
+    :bind
+    (:map company-active-map
+          ("<tab>" . company-complete-selection)
+          ("C-p" . company-select-previous)
+          ("C-n" . company-select-next)
+          ("C-v" . company-next-page)
+          ("\M-v" . company-previous-page)))
+  (global-company-mode t)
 
 
-    (use-package company-box
-      :hook (company-mode . company-box-mode))
+  (use-package company-box
+    :hook (company-mode . company-box-mode))
 
-    (use-package company-shell
-         :config
-         (add-to-list 'company-backends '(company-shell company-shell-env company-fish-shell)))
+  (use-package company-shell)
 
-    (use-package company-irony
-      :config
-      (add-to-list 'company-backends 'company-irony))
-  ;; 需要安装*brew install cmke* 后执行*M-x irony-install-server*
-    (use-package irony
-      :config
-      (add-hook 'c++-mode 'irony-mode)
-      (add-hook 'c-mode-hook 'irony-mode)
-      (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+
 
 #+end_src
 
@@ -1262,12 +1247,6 @@ npm install eslint
     ;;         (lsp-mode . lsp-enable-which-key-intergration))
     :commands (lsp lsp-deferred))
 
-  ;; (use-package eglot ;; client for language server protocol
-  ;;   :config
-  ;;   (add-to-list 'eglot-server-programs
-  ;; 	     `(python-mode . ("pyls" "-v" "--tcp" "--host"
-  ;; 			      "localhost" "--port" :autoport)))
-  ;;   (add-hook 'python-mode-hook 'eglot-ensure))
 
 
 
@@ -1281,10 +1260,6 @@ npm install eslint
           lsp-ui-doc-header nil
           lsp-ui-doc-include-signature t
           lsp-ui-doc-use-childframe t)
-    ;;:bind
-    ;; (:map lsp-ui-mode-map
-    ;;       ("M-." . lsp-ui-peek-find-definition)
-    ;;       ("M-?" . lsp-ui-peek-find-references))
     :commands lsp-ui-mode)
 
   ;; 参考https://www.jianshu.com/p/46667caad6fb
@@ -1301,9 +1276,6 @@ npm install eslint
     :hook (python-mode . (lambda ()
                            (require 'lsp-python-ms)
                            (lsp))))
-  ;; (use-package company-lsp
-  ;;   :config
-  ;;   (push 'company-lsp company-backends))
 
 #+end_src
 

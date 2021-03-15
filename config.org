@@ -169,8 +169,8 @@
   (global-set-key (kbd "s-S-<down>") 'copy-line-down);; | Copy Line Down      
   ;; |-----------------------------+-------------+--------------------------------------|
   ;; | Indent Rigidly              | C-x <Tab>   | indent-rigidly                       |
-  ;; | Indent Region Left          |             | indent-rigidly-left                  |
-  ;; | Indent Region Right         |             | indent-rigidly-right                 |
+(global-set-key (kbd "C-<") 'indent-rigidly-left)  ;; | Indent Region Left          |             | indent-rigidly-left                  |
+(global-set-key (kbd "C->") 'indent-rigidly-right)  ;; | Indent Region Right         |             | indent-rigidly-right                 |
   ;; |-----------------------------+-------------+--------------------------------------|
   (global-set-key (kbd "C-s") 'swiper);; | Search     
   (global-set-key (kbd "C-S-s") 'counsel-imenu);; | Search Tags       
@@ -997,8 +997,8 @@ i c 创建一个循环的事件
 ** all-the-icon-dired
 
 #+begin_src emacs-lisp
-;;(use-package all-the-icons-dired
-;;  :hook (dired-mode . all-the-icons-dired-mode))
+(use-package all-the-icons-dired
+  :hook (dired-mode . all-the-icons-dired-mode))
 #+end_src
 
 
@@ -1076,7 +1076,7 @@ i c 创建一个循环的事件
 #+begin_src emacs-lisp
 (setq org-images-actual-width 300)
   (custom-set-variables
-   '(org-directory "~/Emacs")
+   '(org-directory "~/.emacs.d")
    '(org-default-notes-file (concat org-directory "/notes.org"))
    '(org-export-html-postamble nil)
    '(org-hide-leading-stars t)
@@ -1097,9 +1097,9 @@ i c 创建一个循环的事件
   (global-set-key (kbd "C-c c") 'org-capture)
   (setq org-capture-templates
 	'(
-	  ("n" "Note" entry (file+headline "~/Emacs/notes.org" "Notes") "* Note %?\n%T")
-	  ("t" "TO DO item" entry (file+headline "~/Emacs/todo.org" "TO DO Item") "* %?\n%T" :prepend t)
-	  ("h" "Hack Skill" entry (file+headline "~/Emacs/hackskill.org" "Hack Skill") "* %?\n%T" :prepend t)
+	  ("n" "Note" entry (file+headline "~/.emacs.d/notes.org" "Notes") "* Note %?\n%T")
+	  ("t" "TO DO item" entry (file+headline "~/.emacs.d/todo.org" "TO DO Item") "* %?\n%T" :prepend t)
+	  ("h" "Hack Skill" entry (file+headline "~/.emacs.d/hackskill.org" "Hack Skill") "* %?\n%T" :prepend t)
 	  ))
 
 #+end_src
@@ -1356,7 +1356,7 @@ npm install eslint
 ** Elfeed
 #+begin_src emacs-lisp
   (use-package elfeed
-    :config (setq elfeed-db-directory "~/Emacs/elfeeddb")
+    :config (setq elfeed-db-directory "~/.emacs.d/elfeed/elfeeddb")
     :bind (:map elfeed-search-mode-map
                 ("q" . bjm/elfeed-save-db-and-bury)
                 ("Q" . bjm/elfeed-save-db-and-bury)
@@ -1367,11 +1367,15 @@ npm install eslint
                 )
     )
 
+  (global-set-key (kbd "C-x w") 'elfeed)
 
 
   (use-package elfeed-org
     :config
-    (setq rmh-elfeed-org-files (list "~/Emacs/elfeed.org")))
+    (setq rmh-elfeed-org-files (list "~/.emacs.d/elfeed/elfeed.org")))
+
+
+
 #+end_src
 
 ** 学习插件
